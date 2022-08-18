@@ -1,3 +1,18 @@
+<div class="page-cover">
+  <div class="loader-container">
+    <div class="loader">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</div>
 <section id="MainProduct-{{ section.id }}" class="page-width section-{{ section.id }}-padding" data-section="{{ section.id }}">
   {{ 'section-main-product.css' | asset_url | stylesheet_tag }}
   {{ 'component-accordion.css' | asset_url | stylesheet_tag }}
@@ -77,7 +92,7 @@
               {%- endunless -%}
             {%- endfor -%}
           </ul>
-          <div class="slider-buttons no-js-hidden quick-add-hidden{% if media_count < 2 or section.settings.mobile_thumbnails == 'show' %} small-hide{% endif %}">
+<!--           <div class="slider-buttons no-js-hidden quick-add-hidden{% if media_count < 2 or section.settings.mobile_thumbnails == 'show' %} small-hide{% endif %}">
             <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}">{% render 'icon-caret' %}</button>
             <div class="slider-counter caption">
               <span class="slider-counter--current">1</span>
@@ -86,7 +101,7 @@
               <span class="slider-counter--total">{{ media_count }}</span>
             </div>
             <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}">{% render 'icon-caret' %}</button>
-          </div>
+          </div> -->
         </slider-component>
         {%- if first_3d_model -%}
           <button
@@ -206,11 +221,22 @@
           {%- case block.type -%}
           {%- when '@app' -%}
             {% render block %}
+  
+            
           {%- when 'text' -%}
             <p class="product__text{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}" {{ block.shopify_attributes }}>
               {{- block.settings.text -}}
             </p>
+<a href="#looxReviews">
+            <div class="loox-rating" data-id="{{ product.id }}" 
+            data-rating="{{ product.metafields.loox.avg_rating }}" 
+            data-raters="{{ product.metafields.loox.num_reviews }}" 
+            data-pattern="[rating] <span>([count] Reviews)</span>">
+            </div>
+          </a>
+            
           {%- when 'title' -%}
+            
             <div class="product__title" {{ block.shopify_attributes }}>
               <h1>{{ product.title | escape }}</h1>
               <a href="{{ product.url }}" class="product__title">
@@ -219,11 +245,23 @@
                 </h2>
               </a>
             </div>
+          {%- when 'description' -%}
+            {%- if product.description != blank -%}
+              <div class="product__description rte quick-add-hidden">
+                {{ product.description }}
+              </div>
+            {%- endif -%}
           {%- when 'price' -%}
             <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+              <p class="price-pre-text">Your Price</p>
+              <div class="titan-price">
               {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
+              {% if block.settings.enable_free_shipping == true %}
+                <span class="price-free-shipping">&nbsp; & Free Shipping</span>
+              {% endif %}
+              </div>
             </div>
-            {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+<!--             {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
               <div class="product__tax caption rte">
                 {%- if shop.taxes_included -%}
                   {{ 'products.product.include_taxes' | t }}
@@ -232,7 +270,7 @@
                   {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
                 {%- endif -%}
               </div>
-            {%- endif -%}
+            {%- endif -%} -->
             <div {{ block.shopify_attributes }}>
               {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
               {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
@@ -240,37 +278,13 @@
                 {{ form | payment_terms }}
               {%- endform -%}
             </div>
-          {%- when 'description' -%}
-            {%- if product.description != blank -%}
-              <div class="product__description rte quick-add-hidden">
-                {{ product.description }}
-              </div>
-            {%- endif -%}
           {%- when 'custom_liquid' -%}
             {{ block.settings.custom_liquid }}
-          {%- when 'collapsible_tab' -%}
-            <div class="product__accordion accordion quick-add-hidden" {{ block.shopify_attributes }}>
-              <details id="Details-{{ block.id }}-{{ section.id }}">
-                <summary>
-                  <div class="summary__title">
-                    {% render 'icon-accordion', icon: block.settings.icon %}
-                    <h2 class="h4 accordion__title">
-                      {{ block.settings.heading | default: block.settings.page.title }}
-                    </h2>
-                  </div>
-                  {% render 'icon-caret' %}
-                </summary>
-                <div class="accordion__content rte" id="ProductAccordion-{{ block.id }}-{{ section.id }}">
-                  {{ block.settings.content }}
-                  {{ block.settings.page.content }}
-                </div>
-              </details>
-            </div>
           {%- when 'quantity_selector' -%}
             <div class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}" {{ block.shopify_attributes }}>
-              <label class="form__label" for="Quantity-{{ section.id }}">
+<!--               <label class="form__label" for="Quantity-{{ section.id }}">
                 {{ 'products.product.quantity.label' | t }}
-              </label>
+              </label> -->
 
               <quantity-input class="quantity">
                 <button class="quantity__button no-js-hidden" name="minus" type="button">
@@ -296,43 +310,6 @@
                 <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog">{{ block.settings.text | default: block.settings.page.title }}</button>
               </modal-opener>
               <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.text }}</a>
-          {%- when 'share' -%}
-            <share-button id="Share-{{ section.id }}" class="share-button quick-add-hidden" {{ block.shopify_attributes }}>
-              <button class="share-button__button hidden">
-                {% render 'icon-share' %}
-                {{ block.settings.share_label | escape }}
-              </button>
-              <details id="Details-{{ block.id }}-{{ section.id }}">
-                <summary class="share-button__button">
-                  {% render 'icon-share' %}
-                  {{ block.settings.share_label | escape }}
-                </summary>
-                <div id="Product-share-{{ section.id }}" class="share-button__fallback motion-reduce">
-                  <div class="field">
-                    <span id="ShareMessage-{{ section.id }}" class="share-button__message hidden" role="status">
-                    </span>
-                    <input type="text"
-                          class="field__input"
-                          id="url"
-                          value="{{ product.selected_variant.url | default: product.url | prepend: request.origin }}"
-                          placeholder="{{ 'general.share.share_url' | t }}"
-                          onclick="this.select();"
-                          readonly
-                    >
-                    <label class="field__label" for="url">{{ 'general.share.share_url' | t }}</label>
-                  </div>
-                  <button class="share-button__close hidden no-js-hidden">
-                    {% render 'icon-close' %}
-                    <span class="visually-hidden">{{ 'general.share.close' | t }}</span>
-                  </button>
-                  <button class="share-button__copy no-js-hidden">
-                    {% render 'icon-clipboard' %}
-                    <span class="visually-hidden">{{ 'general.share.copy_to_clipboard' | t }}</span>
-                  </button>
-                </div>
-              </details>
-            </share-button>
-            <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
           {%- when 'variant_picker' -%}
             {%- unless product.has_only_default_variant -%}
               {%- if block.settings.picker_type == 'button' -%}
@@ -362,7 +339,13 @@
                   {%- for option in product.options_with_values -%}
                     <div class="product-form__input product-form__input--dropdown">
                       <label class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}">
-                        {{ option.name }}
+                        {% if option.name == 'Style' %}
+                          Cable Type
+                        {% elsif option.name == 'Size' %}
+                          Length
+                        {% else %}
+                          {{ option.name }}
+                        {% endif %}
                       </label>
                       <div class="select">
                         <select id="Option-{{ section.id }}-{{ forloop.index0 }}"
@@ -444,6 +427,24 @@
                           </svg>
                         </div>
                     </button>
+                    
+                    {%- if block.settings.white_text_under_add_to_cart or block.settings.green_text_under_add_to_cart -%}
+                      <div class="add-to-cart__note-message">
+                        {%- if block.settings.white_text_under_add_to_cart -%}
+                          <span class="note-message note-message__white">{{ block.settings.white_text_under_add_to_cart }}</span>
+                        {% endif %}
+
+                        {%- if block.settings.white_text_under_add_to_cart and block.settings.green_text_under_add_to_cart -%}
+                          &nbsp;
+                        {% endif %}
+
+                        {%- if block.settings.green_text_under_add_to_cart -%}
+                          <span class="note-message note-message__green">{{ block.settings.green_text_under_add_to_cart }}</span>
+                        {% endif %}
+                      </div>
+                    {%- endif -%}
+                  
+                    <p class="add-to-cart-note"></p>
                     {%- if block.settings.show_dynamic_checkout -%}
                       {{ form | payment_button }}
                     {%- endif -%}
@@ -637,6 +638,59 @@
   </script>
 </section>
 
+<script>
+
+// Page loader
+const wait = (delay = 0) =>
+new Promise(resolve => setTimeout(resolve, delay));
+
+const setVisible = (elementOrSelector, visible) => 
+  (typeof elementOrSelector === 'string'
+    ? document.querySelector(elementOrSelector)
+    : elementOrSelector
+  ).style.display = visible ? 'block' : 'none';
+
+setVisible('.page-cover', true);
+
+document.addEventListener('DOMContentLoaded', () =>
+  wait(1000).then(() => {
+    setVisible('.page-cover', false);
+  }));
+
+
+// Add items to cart and redirect to basket page
+addTocartOnProductImageClick = () => {
+  let variantId = document.querySelector('.product-form form [name="id"]').value;
+  let qty = document.querySelector('.quantity__input').value;
+  
+  var addData = {
+    'id': variantId,
+    'quantity': qty
+  };
+  
+  fetch('/cart/add.js', {
+    body: JSON.stringify(addData),
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Requested-With':'xmlhttprequest'
+    },
+    method: 'POST'
+  }).then(function(response) {
+    window.location.href="/cart";
+    return response.json();
+  }).then(function(json) {
+    console.log(json)
+  }).catch(function(err) {
+    console.error(err)
+  });
+}
+
+document.querySelectorAll(".add-to-cart-image").forEach(function(button) {
+  button.addEventListener('click', addTocartOnProductImageClick);
+})
+</script>
+
 {% schema %}
 {
   "name": "t:sections.main-product.name",
@@ -686,7 +740,15 @@
     {
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+         "type": "checkbox",
+          "id": "enable_free_shipping",
+          "default": true,
+          "label": "Enable free shipping"
+        }
+      ]
     },
     {
       "type": "quantity_selector",
@@ -727,6 +789,18 @@
           "default": true,
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+        },
+        {
+          "type": "text",
+          "id": "white_text_under_add_to_cart",
+          "label": "White label",
+          "default": "Note:"
+        },
+        {
+          "type": "text",
+          "id": "green_text_under_add_to_cart",
+          "label": "Green label",
+          "default": "Not Available on Amazon or eBay"
         }
       ]
     },

@@ -1,0 +1,404 @@
+/** TitanPower CSS - Product Page **/
+.product.product--large.product--stacked.grid {
+  > .grid__item {
+    max-width: 50%;
+    width: calc(50% - var(--grid-desktop-horizontal-spacing) / 2);
+  }
+
+  @media (max-width: 767.98px) {
+    > .grid__item {
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+}
+.product__info-wrapper .product__info-container {
+  .product__title {
+    margin: 8px 0;
+  
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      color: #EDEDED;
+    }
+  }
+
+  
+  .product__description {
+    margin-top: 0;
+    
+    .product__description__item {
+      margin: 8px 0;
+      font-size: 21px;
+      line-height: 1.2;
+      font-family: "Work Sans";
+      font-weight: 200;
+    }
+
+    h3.h3-extra {
+      margin: 0;
+      line-height: 1.8;
+      color: rgb(96, 198, 85);
+      font-family: "Work Sans";
+      font-size: 30px;
+      font-weight: 800;
+    }
+  }
+}
+
+.price-pre-text {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.price__container {
+  .price__regular {
+    span.price-item {
+      font-weight: 700;
+      color: #60C655;
+      font-size: 25px;
+    }
+  }
+}
+
+.titan-price {
+  display: flex;
+  align-items: center;
+
+  .price-free-shipping {
+    font-family: "Work Sans";
+    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+  }
+}
+
+.product-form__input {
+  label.form__label {
+    font-weight: 600;
+    font-size: 12px;
+    color: #ffffff;
+  }
+
+  .select .icon.icon-caret {
+    display: none;
+  }
+
+  .select:before {
+    box-shadow: none;
+  }
+
+  .select__select {
+    height: auto;
+    padding: 8px 24px 8px 8px;
+    font-size: 16px;
+    color: #ffffff;
+    font-family: "Lato";
+    font-weight: 400;
+    border: 0.75px solid #ffffff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjUiPjxwYXRoIGZpbGw9IiM5QjlCOUIiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0ibTAgMCA0IDUgNC01eiIvPjwvc3ZnPg==);
+    background-position: right 8px top 50%;
+    background-repeat: no-repeat;
+    background-size: 8px auto;
+    border: 1px solid #d9d9d9;
+    box-shadow: none;
+    cursor: pointer;
+    display: block;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.3;
+    margin: 0;
+    max-width: 300px;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #131313;
+  }
+
+  .select__select:focus {
+      border-color: #60c655;
+      box-shadow: none;
+    }
+
+    .select__select:hover {
+      border-color: #60c655;
+      box-shadow: none;
+    }
+}
+
+.product-form__quantity {
+  .quantity__button {
+    color: #60cc65;
+
+    svg.icon {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  .quantity__button:hover {
+    background-color: #c4c4c4;
+    border-radius: 10px;
+  }
+
+  .quantity__input {
+      font-size: 20px;
+      font-weight: 700;
+      font-family: 'Work Sans';
+    }
+}
+
+.product-form {
+  .product-form__buttons {
+    max-width: 100%;
+
+    .product-form__submit {
+        padding: 30px 48px;
+        font-size: 32px;
+        font-weight: 700;
+        text-transform: uppercase;
+
+        > span {
+          display: flex;
+        }
+
+        > span:after {
+          content: "👉";
+          display: block;
+          margin-left: 10px;
+        }
+
+        @media (max-width: 767.98px) {
+          font-size: 16px;
+        }
+      }
+  
+    .product-form__submit:hover {
+      opacity: 0.75;
+    }
+  }
+}
+
+.add-to-cart__note-message {
+  display: flex;
+  justify-content: center;
+
+  .note-message {
+    font-family: "Work Sans";
+    font-weight: 600;
+    line-height: 1;
+    font-size: 14px;
+  }
+  
+  .note-message__white {
+    color: #ffffff
+  }
+
+  .note-message__green {
+    color: rgb(96, 198, 85);
+  }
+}
+
+.loox-rating {
+  .loox-icon {
+    margin-right: 15px;
+  }
+
+  span {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    font-family: "Lato";
+
+    span {
+      color: rgb(96, 198, 85);
+      font-weight: 400;
+    }
+  }
+}
+
+/** Media Gallery **/
+.add-to-cart-image {
+  cursor: pointer;
+}
+
+.product__media-list {
+  li.product__media-item:not(:first-of-type) {
+    display: none;
+  }
+}
+
+/** Loader **/
+#loading {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(192, 192, 192, 0.5);
+  background-image: url("https://i.stack.imgur.com/MnyxU.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.loader-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+}
+
+.loader {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 8px;
+}
+.loader div {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #60c655;
+  border-radius: 50%;
+}
+.loader div:before,
+.loader div:after {
+  content: '';
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  border-radius: 50%;
+}
+.loader div:before {
+  background-color: #000;
+  animation: scale-1 2400ms linear infinite;
+}
+.loader div:after {
+  background-color: #60c655;
+  animation: scale-2 2400ms linear infinite;
+}
+.loader div:nth-child(2):before,
+.loader div:nth-child(2):after {
+  animation-delay: 300ms;
+}
+.loader div:nth-child(3):before,
+.loader div:nth-child(3):after {
+  animation-delay: 600ms;
+}
+.loader div:nth-child(4):before,
+.loader div:nth-child(4):after {
+  animation-delay: 900ms;
+}
+.loader div:nth-child(5):before,
+.loader div:nth-child(5):after {
+  animation-delay: 1200ms;
+}
+.loader div:nth-child(6):before,
+.loader div:nth-child(6):after {
+  animation-delay: 1500ms;
+}
+.loader div:nth-child(7):before,
+.loader div:nth-child(7):after {
+  animation-delay: 1800ms;
+}
+.loader div:nth-child(8):before,
+.loader div:nth-child(8):after {
+  animation-delay: 2100ms;
+}
+.loader div:nth-child(9):before,
+.loader div:nth-child(9):after {
+  animation-delay: 2400ms;
+}
+@-moz-keyframes scale-1 {
+  0% {
+    transform: scale(0);
+    z-index: 2;
+  }
+  50%, 100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes scale-1 {
+  0% {
+    transform: scale(0);
+    z-index: 2;
+  }
+  50%, 100% {
+    transform: scale(1);
+  }
+}
+@-o-keyframes scale-1 {
+  0% {
+    transform: scale(0);
+    z-index: 2;
+  }
+  50%, 100% {
+    transform: scale(1);
+  }
+}
+@keyframes scale-1 {
+  0% {
+    transform: scale(0);
+    z-index: 2;
+  }
+  50%, 100% {
+    transform: scale(1);
+  }
+}
+@-moz-keyframes scale-2 {
+  0%, 50% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes scale-2 {
+  0%, 50% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-o-keyframes scale-2 {
+  0%, 50% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes scale-2 {
+  0%, 50% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
